@@ -5,13 +5,13 @@ import _thread
 import argparse
 import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="",
-  database="db_daten"
-)
-mycursor = mydb.cursor()
+# mydb = mysql.connector.connect(
+#   host="localhost",
+#   user="root",
+#   password="",
+#   database="db_daten"
+# )
+# mycursor = mydb.cursor()
 
 def getFaceBox(net, frame,conf_threshold = 0.75):
     frameOpencvDnn = frame.copy()
@@ -66,7 +66,7 @@ frame_width = 1920
 frame_height = 1200
 fps = 30.0
 
-cap = cv2.VideoCapture(1,cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
@@ -112,12 +112,12 @@ while cv2.waitKey(1) < 0:
                     print("Age : {}, conf = {:.3f}".format(age, agePreds[0].max()))
                     print("time : {:.3f}".format(time.time() - t))
                     
-                    sql = "INSERT INTO `daten`(`age`, `gender`) VALUES (%s, %s)"
-                    val = (str(age),str(gender))
-                    print(val)
-                    mycursor.execute(sql, val)
-                    mydb.commit()
-                    print(mycursor.rowcount, "record inserted")
+                    # sql = "INSERT INTO `daten`(`age`, `gender`) VALUES (%s, %s)"
+                    # val = (str(age),str(gender))
+                    # print(val)
+                    # mycursor.execute(sql, val)
+                    # mydb.commit()
+                    # print(mycursor.rowcount, "record inserted")
                 
             else:
                 var_gender=gender
